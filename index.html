@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site em Breve</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 90%;
+        }
+
+        .icon {
+            font-size: 80px;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .time-unit {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 80px;
+        }
+
+        .time-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .time-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+        }
+
+        .contact-info {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .contact-info p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .countdown {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .time-unit {
+                min-width: 60px;
+                padding: 10px;
+            }
+            
+            .time-number {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">🚀</div>
+        <h1>Em Breve</h1>
+        <p>Estamos trabalhando duro para trazer algo incrível para você. Nosso site estará disponível em breve!</p>
+        
+        <div class="countdown">
+            <div class="time-unit">
+                <span class="time-number" id="days">00</span>
+                <span class="time-label">Dias</span>
+            </div>
+            <div class="time-unit">
+                <span class="time-number" id="hours">00</span>
+                <span class="time-label">Horas</span>
+            </div>
+            <div class="time-unit">
+                <span class="time-number" id="minutes">00</span>
+                <span class="time-label">Minutos</span>
+            </div>
+            <div class="time-unit">
+                <span class="time-number" id="seconds">00</span>
+                <span class="time-label">Segundos</span>
+            </div>
+        </div>
+
+        <div class="contact-info">
+            <p><strong>Fique por dentro das novidades!</strong></p>
+            <p>📧 contato@seusite.com</p>
+            <p>📱 (11) 99999-9999</p>
+        </div>
+    </div>
+
+    <script>
+        // Definir data de lançamento (exemplo: 30 dias a partir de hoje)
+        const launchDate = new Date();
+        launchDate.setDate(launchDate.getDate() + 30);
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = launchDate.getTime() - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+
+            if (distance < 0) {
+                document.querySelector('.countdown').innerHTML = '<p>🎉 Site já disponível! 🎉</p>';
+            }
+        }
+
+        // Atualizar countdown a cada segundo
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Executar imediatamente
+    </script>
+</body>
+</html>
