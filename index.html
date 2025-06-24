@@ -44,6 +44,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             position: relative;
             max-width: 78.5rem;
+            transition: all 0.3s ease;
         }
 
         nav {
@@ -89,7 +90,7 @@
             display: none;
             background: none;
             border: none;
-            color: white;
+            color: #f4e4bc;
             font-size: 1.5rem;
             cursor: pointer;
             padding: 10px;
@@ -101,10 +102,9 @@
             top: 100%;
             left: 0;
             right: 0;
-            background: #2c3e50;
+            background: #1E2841;
             border-radius: 0 0 25px 25px;
             padding: 20px;
-            margin-top: 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             opacity: 0;
             transform: translateY(-10px);
@@ -248,7 +248,7 @@
             header {
                 margin: 15px;
                 padding: 15px 25px;
-                border-radius: 25px;
+                border-radius: 40px;
             }
 
             .logo {
@@ -275,9 +275,11 @@
             }
 
             .text-primary-content h1 {
-                font-size: 2.8rem;
+                font-size: 4rem;
                 margin-bottom: 30px;
                 line-height: 1.2;
+                min-width: auto;
+                text-align: left;
             }
 
             .cta-buttons {
@@ -299,9 +301,9 @@
 
         @media (max-width: 480px) {
             header {
-                margin: 10px;
+                margin: 40px 20px;
                 padding: 12px 20px;
-                border-radius: 20px;
+                border-radius: 40px;
             }
 
             .logo {
@@ -317,8 +319,10 @@
             }
 
             .text-primary-content h1 {
-                font-size: 2.2rem;
+                font-size: 3rem;
                 margin-bottom: 25px;
+                min-width: auto;
+                text-align: left;
             }
 
             .cta-buttons {
@@ -334,16 +338,6 @@
                 width: 100%;
                 max-width: 200px;
                 text-align: center;
-            }
-
-            /* Mobile illustration adjustments */
-            .illustration {
-                transform: scale(0.75);
-                margin: 10px 0;
-            }
-
-            .computer-image {
-                width: 220px;
             }
         }
 
@@ -364,6 +358,12 @@
                 padding: 12px 24px;
                 font-size: 0.95rem;
             }
+        }
+
+        header.mobile-menu-open {
+            border-bottom-left-radius: 0px;
+            border-bottom-right-radius: 0px;
+            transition: all 0.1s ease;
         }
 
         /* Landscape mobile optimization */
@@ -399,8 +399,7 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#" class="active">Início</a></li>
-                <li><a href="#">Serviços</a></li>
-                <li><a href="#">Portfólio</a></li>
+                <li><a href="#">Serviços</a></li>                
                 <li><a href="#">Contato</a></li>
             </ul>
             <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
@@ -410,8 +409,7 @@
         <div class="mobile-menu" id="mobileMenu">
             <ul>
                 <li><a href="#" class="active">Início</a></li>
-                <li><a href="#">Serviços</a></li>
-                <li><a href="#">Portfólio</a></li>
+                <li><a href="#">Serviços</a></li>                
                 <li><a href="#">Contato</a></li>
             </ul>
         </div>
@@ -433,10 +431,10 @@
                     <img src="public/computer.png" alt="Computador com elementos digitais" class="computer-image">
                 </div>
             </div>
-            <div class="cta-buttons">
+            <!-- <div class="cta-buttons">
                 <a href="#" class="btn btn-primary">Portfólio ↗</a>
                 <a href="#" class="btn btn-secondary">Contato</a>
-            </div>
+            </div> -->
         </div>
     </main>
 
@@ -444,10 +442,12 @@
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobileMenu');
             const toggle = document.querySelector('.mobile-menu-toggle');
-            
+            const header = document.querySelector('header');
+
             if (mobileMenu.classList.contains('active')) {
                 // Close menu
                 mobileMenu.classList.remove('active');
+                header.classList.remove('mobile-menu-open');
                 toggle.innerHTML = '☰';
                 setTimeout(() => {
                     mobileMenu.style.display = 'none';
@@ -457,6 +457,7 @@
                 mobileMenu.style.display = 'block';
                 setTimeout(() => {
                     mobileMenu.classList.add('active');
+                    header.classList.add('mobile-menu-open');
                 }, 10);
                 toggle.innerHTML = '✕';
             }
